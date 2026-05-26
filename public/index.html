@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WeYell — Pixel Agent Office</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div id="app">
+    <div id="stage">
+      <div id="topbar">
+        <div class="brand">
+          <span class="logo">▣</span>
+          <span class="title">WeYell</span>
+          <span class="tagline">// pixel agent office</span>
+        </div>
+        <div class="channel">
+          <span class="channel-label">channel</span>
+          <span id="channel-name">—</span>
+        </div>
+        <div class="statuses">
+          <div class="status" title="Discord Embedded SDK">
+            <span class="dot" id="sdk-dot"></span>
+            <span id="sdk-text">sdk…</span>
+          </div>
+          <div class="status" id="status" title="Hermes gateway">
+            <span class="dot" id="status-dot"></span>
+            <span id="status-text">connecting…</span>
+          </div>
+        </div>
+      </div>
+      <canvas id="office" width="960" height="640"></canvas>
+      <div id="legend">
+        <span><i class="sw idle"></i>idle</span>
+        <span><i class="sw working"></i>working</span>
+        <span><i class="sw thinking"></i>thinking</span>
+        <span><i class="sw waiting"></i>waiting</span>
+        <span><i class="sw error"></i>error</span>
+      </div>
+    </div>
+    <aside id="sidebar">
+      <section class="panel">
+        <h2>Agents</h2>
+        <ul id="agent-list"></ul>
+      </section>
+      <section class="panel" id="detail-panel">
+        <h2>Detail</h2>
+        <div id="detail-empty" class="muted">Click an agent to inspect</div>
+        <div id="detail" hidden>
+          <div class="detail-head">
+            <div class="detail-name" id="d-name">—</div>
+            <div class="detail-role muted" id="d-role">—</div>
+          </div>
+          <div class="detail-row"><span class="muted">state</span><span id="d-state" class="badge">—</span></div>
+          <div class="detail-row"><span class="muted">tool</span><span id="d-tool">—</span></div>
+          <div class="detail-row"><span class="muted">activity</span><span id="d-activity">—</span></div>
+          <h3>Recent</h3>
+          <ul id="d-log" class="log"></ul>
+        </div>
+      </section>
+      <section class="panel">
+        <h2>Stream</h2>
+        <ul id="stream" class="log stream"></ul>
+      </section>
+    </aside>
+  </div>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
