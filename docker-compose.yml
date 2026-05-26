@@ -11,8 +11,6 @@ services:
     environment:
       - PORT=3333
       - DEMO_MODE=${DEMO_MODE:-true}
-      - HERMES_GATEWAY_URL=${HERMES_GATEWAY_URL:-ws://host.docker.internal:18789/}
-      - VITE_DISCORD_CLIENT_ID=${VITE_DISCORD_CLIENT_ID:-}
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - DISCORD_BOT_TOKEN=${DISCORD_BOT_TOKEN:-}
+      - DISCORD_CHANNEL_ID=${DISCORD_CHANNEL_ID:-}
     restart: unless-stopped

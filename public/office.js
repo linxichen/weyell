@@ -257,10 +257,13 @@
     const text = document.getElementById('status-text');
     dot.className = 'dot ' + s;
     const labels = {
-      connected: 'live · hermes gateway',
+      connected: 'live · discord feed',
       demo: 'demo mode',
       disconnected: 'disconnected',
-      connecting: 'connecting…'
+      connecting: 'connecting…',
+      unauthorized: 'bad token',
+      'no-channel': 'channel missing',
+      error: 'api error'
     };
     text.textContent = labels[s] || s;
   }
@@ -382,13 +385,18 @@
       let msg;
       try { msg = JSON.parse(ev.data); } catch { return; }
       if (msg.type === 'snapshot') {
-        setStatus(msg.demoMode ? 'demo' : msg.gatewayStatus);
-        msg.agents.forEach(upsertAgent);
+        setStatus(msg.demoMode ? 'demo' : msg.discordStatus || 'connecting');
+        (msg.agents || []).forEach(upsertAgent);
         renderAgentList();
         renderDetail();
         renderStream();
       } else if (msg.type === 'status') {
-        setStatus(msg.gatewayStatus);
+        setStatus(msg.discordStatus || msg.gatewayStatus);
+      } else if (msg.type === 'agents') {
+        (msg.agents || []).forEach(upsertAgent);
+        renderAgentList();
+        renderDetail();
+        renderStream();
       } else if (msg.type === 'agent') {
         upsertAgent(msg.agent);
         renderAgentList();
